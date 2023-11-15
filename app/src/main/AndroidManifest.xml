@@ -14,7 +14,7 @@
         android:theme="@style/Theme.RecyclerViewRetrofitFrancisco"
         tools:targetApi="31">
         <activity
-            android:name=".framework.main.MainActivity"
+            android:name=".framework.posts.PostListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

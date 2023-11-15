@@ -1,4 +1,4 @@
-package com.example.recyclerviewretrofitfrancisco.framework.main
+package com.example.recyclerviewretrofitfrancisco.framework.posts
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,13 +8,13 @@ import com.example.recyclerviewretrofitfrancisco.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class PostListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val viewModel : MainViewModel by viewModels()
+    private val viewModel : PostListViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.post_list_activity)
     }
 }
