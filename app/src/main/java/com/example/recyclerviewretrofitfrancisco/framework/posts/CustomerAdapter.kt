@@ -13,10 +13,10 @@ import com.example.recyclerviewretrofitfrancisco.R
 import com.example.recyclerviewretrofitfrancisco.databinding.ViewPostBinding
 import com.example.recyclerviewretrofitfrancisco.domain.model.Post
 
-class PostAdapter(
+class CustomerAdapter(
     val context: Context,
     val actions : PostActions
-) : ListAdapter<Post, PostAdapter.ItemViewholder>(DiffCallback()){
+) : ListAdapter<Post, CustomerAdapter.ItemViewholder>(DiffCallback()){
 
     interface PostActions{
         fun onDelete(post : Post)

@@ -1,4 +1,4 @@
 package com.example.recyclerviewretrofitfrancisco.framework.posts
 
-class PostListState {
+sealed class CustomerListEvent {
 }

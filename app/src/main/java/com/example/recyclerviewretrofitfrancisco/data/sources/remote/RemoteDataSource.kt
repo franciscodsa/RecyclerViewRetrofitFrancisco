@@ -1,4 +1,6 @@
 package com.example.recyclerviewretrofitfrancisco.data.sources.remote
 
-class RemoteDataSource {
+import javax.inject.Inject
+
+class RemoteDataSource @Inject constructor(){
 }
