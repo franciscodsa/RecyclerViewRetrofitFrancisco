@@ -16,19 +16,6 @@ import java.time.LocalDate
 import javax.inject.Singleton
 
 
-class LocalDateAdapter {
-    @ToJson
-    fun toJson(localDate: LocalDate): String {
-        // Convertir LocalDate a String para la serialización en el JSON
-        return localDate.toString()
-    }
-
-    @FromJson
-    fun fromJson(localDateString: String): LocalDate {
-        // Convertir String a LocalDate para la deserialización desde JSON
-        return LocalDate.parse(localDateString)
-    }
-}
 
 @Module
 @InstallIn(SingletonComponent::class)
