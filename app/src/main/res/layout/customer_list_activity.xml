@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".framework.posts.CustomerListActivity">
+    tools:context=".framework.customer.CustomerListActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
@@ -33,7 +33,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewPostList"
+        android:id="@+id/recyclerViewCustomerList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

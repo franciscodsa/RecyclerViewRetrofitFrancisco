@@ -1,11 +1,10 @@
-package com.example.recyclerviewretrofitfrancisco.data.model
+package com.example.recyclerviewretrofitfrancisco.domain.model
 
 
-import com.example.recyclerviewretrofitfrancisco.domain.model.Customer
 import com.google.gson.annotations.SerializedName
 import java.time.LocalDate
 
-data class CustomerResponse(
+data class Customer(
     @SerializedName("id")
     val id: Int,
     @SerializedName("firstName")
@@ -17,5 +16,6 @@ data class CustomerResponse(
     @SerializedName("email")
     val email: String,
     @SerializedName("phone")
-    val phone: String
+    val phone: String,
+    var isSelected: Boolean = false
 )

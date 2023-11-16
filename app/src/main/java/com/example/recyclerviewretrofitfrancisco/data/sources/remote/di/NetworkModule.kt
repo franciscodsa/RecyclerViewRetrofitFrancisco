@@ -1,5 +1,6 @@
 package com.example.recyclerviewretrofitfrancisco.data.sources.remote.di
 
+import com.example.recyclerviewretrofitfrancisco.data.sources.remote.CustomerService
 import com.example.recyclerviewretrofitfrancisco.utils.Constants.BASE_URL
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.Moshi
@@ -14,7 +15,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.time.LocalDate
 import javax.inject.Singleton
 
-class LocalDateAdapter{
+
+class LocalDateAdapter {
     @ToJson
     fun toJson(localDate: LocalDate): String {
         // Convertir LocalDate a String para la serialización en el JSON
@@ -33,17 +35,30 @@ class LocalDateAdapter{
 object NetworkModule {
 
 
- /*   @Singleton
+    /*   @Singleton
+       @Provides
+       fun provideConverterFactory(): GsonConverterFactory =
+           GsonConverterFactory.create()*/
     @Provides
-    fun provideConverterFactory(): GsonConverterFactory =
-        GsonConverterFactory.create()*/
+    @Singleton
+    fun provideOkHttpClient(): OkHttpClient {
+        // Create and configure OkHttpClient here
+        return OkHttpClient.Builder().build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi {
+        // Create and configure Moshi here
+        return Moshi.Builder().build()
+    }
 
     @Singleton
     @Provides
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
         moshi: Moshi
-    ):Retrofit{
+    ): Retrofit {
         val moshiBuilder = moshi.newBuilder()
             .add(LocalDateAdapter())
 
@@ -56,6 +71,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun providePostService(retrofit: Retrofit):PostService = retrofit.create(PostService::class.java)
+    fun providePostService(retrofit: Retrofit): CustomerService =
+        retrofit.create(CustomerService::class.java)
 
 }

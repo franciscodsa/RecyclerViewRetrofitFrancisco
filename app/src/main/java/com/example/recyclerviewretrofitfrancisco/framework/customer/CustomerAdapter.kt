@@ -1,4 +1,4 @@
-package com.example.recyclerviewretrofitfrancisco.framework.posts
+package com.example.recyclerviewretrofitfrancisco.framework.customer
 
 import android.content.Context
 import android.graphics.Color
@@ -10,22 +10,22 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewretrofitfrancisco.R
-import com.example.recyclerviewretrofitfrancisco.databinding.ViewPostBinding
-import com.example.recyclerviewretrofitfrancisco.domain.model.Post
+import com.example.recyclerviewretrofitfrancisco.databinding.ViewCustomerListBinding
+import com.example.recyclerviewretrofitfrancisco.domain.model.Customer
 
 class CustomerAdapter(
     val context: Context,
-    val actions : PostActions
-) : ListAdapter<Post, CustomerAdapter.ItemViewholder>(DiffCallback()){
+    val actions : CustomerActions
+) : ListAdapter<Customer, CustomerAdapter.ItemViewholder>(DiffCallback()){
 
-    interface PostActions{
-        fun onDelete(post : Post)
-        fun onStartSelectedMode(post: Post)
-        fun itemHasBeenClicked(post: Post)
+    interface CustomerActions{
+        fun onDelete(customer : Customer)
+        fun onStartSelectedMode(customer: Customer)
+        fun itemHasBeenClicked(customer: Customer)
 
     }
 
-    private var selectedPostsList = mutableListOf<Post>()
+    private var selectedCustomersList = mutableListOf<Customer>()
     private var selectedMode : Boolean = false
 
     fun startSelectedMode(){
@@ -35,18 +35,18 @@ class CustomerAdapter(
 
     fun resetSelectedMode(){
         selectedMode = false
-        selectedPostsList.clear()
+        selectedCustomersList.clear()
         notifyDataSetChanged()
     }
 
-    fun setSelectedItems(selectedPosts : List<Post>){
-        selectedPostsList.clear()
-        selectedPostsList.addAll(selectedPosts)
+    fun setSelectedItems(selectedCustomer : List<Customer>){
+        selectedCustomersList.clear()
+        selectedCustomersList.addAll(selectedCustomer)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ItemViewholder{
         return ItemViewholder(
-            LayoutInflater.from(parent.context).inflate(R.layout.view_post, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.view_customer_list, parent, false)
         )
     }
 
@@ -56,9 +56,8 @@ class CustomerAdapter(
     }
 
     inner class ItemViewholder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        private val binding = ViewPostBinding.bind(itemView)
-
-        fun bind(item : Post){
+        private val binding = ViewCustomerListBinding.bind(itemView)
+        fun bind(item : Customer){
             itemView.setOnClickListener{
                 if (!selectedMode){
                     actions.onStartSelectedMode(item)
@@ -72,17 +71,17 @@ class CustomerAdapter(
                         if (binding.selected.isChecked){
                             item.isSelected = true
                             itemView.setBackgroundColor(Color.GREEN)
-                            selectedPostsList.add(item)
+                            selectedCustomersList.add(item)
                         }else{
                             item.isSelected = false
                             itemView.setBackgroundColor(Color.WHITE)
-                            selectedPostsList.remove(item)
+                            selectedCustomersList.remove(item)
                         }
                         actions.itemHasBeenClicked(item)
                     }
                 }
 
-                tvNombre.text= item.title
+                tvNombre.text= item.firstName
                 tvId.text= item.id.toString()
 
                 if (selectedMode){
@@ -92,7 +91,7 @@ class CustomerAdapter(
                     selected.visibility= View.GONE
                 }
 
-                if (selectedPostsList.contains(item)){
+                if (selectedCustomersList.contains(item)){
                     itemView.setBackgroundColor(Color.GREEN)
                     binding.selected.isChecked = true
                 }else {
@@ -104,12 +103,12 @@ class CustomerAdapter(
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Post>() {
-        override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+    class DiffCallback : DiffUtil.ItemCallback<Customer>() {
+        override fun areItemsTheSame(oldItem: Customer, newItem: Customer): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+        override fun areContentsTheSame(oldItem: Customer, newItem: Customer): Boolean {
             return oldItem == newItem
         }
     }
@@ -119,7 +118,7 @@ class CustomerAdapter(
             //if (!selectedMode) {
             when (direction) {
                 ItemTouchHelper.LEFT -> {
-                    selectedPostsList.remove(currentList[viewHolder.adapterPosition])
+                    selectedCustomersList.remove(currentList[viewHolder.adapterPosition])
                     actions.onDelete(currentList[viewHolder.adapterPosition])
                     if (selectedMode)
                         actions.itemHasBeenClicked(currentList[viewHolder.adapterPosition])

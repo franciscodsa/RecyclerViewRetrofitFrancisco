@@ -1,4 +1,4 @@
-package com.example.recyclerviewretrofitfrancisco.framework.posts
+package com.example.recyclerviewretrofitfrancisco.framework.customer
 
 import android.content.Context
 import android.graphics.Canvas
